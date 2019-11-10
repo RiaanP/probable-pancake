@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import TableRow from './TableRow';
 
 export default class Create extends Component {
     constructor(props) {
@@ -16,8 +15,8 @@ export default class Create extends Component {
             person_name: '',
             person_email: '',
             person_number: '',
-            person_start: Date.now(),
-            person_end: ''
+            person_start: '2019-01-01',
+            person_end: '2019-12-01'
         }
     }
 
