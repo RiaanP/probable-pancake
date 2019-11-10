@@ -60,7 +60,7 @@ export default class Create extends Component {
             person_end: this.state.person_end,
             person_created: Date.now()
         };
-        axios.post('http://localhost:4000/person/add', obj)
+        axios.post('https://shaun-ability-test.herokuapp.com/person/add', obj)
             .then(res => console.log(res.data));
 
         this.setState({
