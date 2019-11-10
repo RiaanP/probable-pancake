@@ -20,9 +20,6 @@ let Person = new Schema({
     },
     person_created:{
         type: Date
-    },
-    person_active:{
-        type: Boolean
     }
 },{
     collection: 'person'

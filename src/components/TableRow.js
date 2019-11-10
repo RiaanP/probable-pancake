@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 
 class TableRow extends Component {
+
+    constructor(props) {
+        super(props);
+    }
+
     render() {
         return (
             <tr>
@@ -21,12 +26,6 @@ class TableRow extends Component {
                 </td>
                 <td>
                     {this.props.obj.person_created}
-                </td>
-                <td>
-                    <button className="btn btn-primary">Edit</button>
-                </td>
-                <td>
-                    <button className="btn btn-danger">Delete</button>
                 </td>
             </tr>
         );
