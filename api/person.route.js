@@ -18,12 +18,13 @@ personRoutes.route('/add').post(function (req, res) {
 
 // Defined get data(index or listing) route
 personRoutes.route('/').get(function (req, res) {
-    Person.find(function(err, businesses){
+    Person.find(function(err, person){
         if(err){
             console.log(err);
         }
         else {
-            res.json(businesses);
+            console.log(person);
+            res.json(person);
         }
     });
 });

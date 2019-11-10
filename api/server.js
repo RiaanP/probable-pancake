@@ -7,8 +7,12 @@ const mongoose = require('mongoose');
 const config = require('./DB.js');
 const personRoute = require('./person.route');
 
+let mongolaburi =
+    process.env.MONGOLAB_URI ||
+    config.DB;
+
 mongoose.Promise = global.Promise;
-mongoose.connect(config.DB, { useNewUrlParser: true, useUnifiedTopology: true }).then(
+mongoose.connect(mongolaburi, { useNewUrlParser: true, useUnifiedTopology: true }).then(
     () => {console.log('Database is connected') },
     err => { console.log('Can not connect to the database'+ err)}
 );

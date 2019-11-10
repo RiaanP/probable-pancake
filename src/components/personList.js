@@ -10,7 +10,7 @@ export default class PersonList extends Component {
     }
 
     componentDidMount() {
-        axios.get('https://shaun-ability-test.herokuapp.com:4000/person')
+        axios.get('http://localhost:4000/person')
             .then(response => {
                 this.setState({person: response.data});
             })
