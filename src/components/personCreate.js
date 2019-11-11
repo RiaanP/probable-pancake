@@ -2,7 +2,20 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import {MDBRow, MDBCol, MDBBtn} from "mdbreact";
+import SectionContainer from "./../components/sectionContainer";
+import {
+    MDBContainer,
+    MDBRow,
+    MDBCol,
+    MDBInput,
+    MDBBtn,
+    MDBIcon,
+    MDBCard,
+    MDBCardBody,
+    MDBModal,
+    MDBModalBody,
+    MDBModalFooter
+} from "mdbreact";
 
 function validate(name, email, phone) {
     const errors = [];
@@ -21,8 +34,7 @@ function validate(name, email, phone) {
     if (phone.length < 10) {
         errors.push("Phone should be at least 10 characters long");
     }
-    if (!/^\d+$/.test(phone))
-    {
+    if (!/^\d+$/.test(phone)) {
         errors.push("Phone should be at least 10 characters long");
     }
 
@@ -92,7 +104,7 @@ export default class Create extends Component {
         const errors = validate(obj.person_name, obj.person_email, obj.person_number);
         e.target.className += " was-validated";
         if (errors.length > 0) {
-            this.setState({ errors });
+            this.setState({errors});
             return;
         }
 
@@ -112,92 +124,90 @@ export default class Create extends Component {
 
     render() {
         return (
-            <div style={{marginTop: 10}}>
-                <h3>Create Person</h3>
-                <form className={"needs-validation"} onSubmit={this.onSubmit} noValidate>
-                    <MDBRow>
-                        <MDBCol md="4" className="mb-3">
-                            <label htmlFor="defaultFormRegisterNameEx"
-                                   className="grey-text">Fullname
-                            </label>
-                            <input
-                                name="fname"
-                                type="text"
-                                id="defaultFormRegisterNameEx"
-                                className="form-control"
-                                value={this.state.person_name}
-                                onChange={this.onChangePersonName}
-                                required
-                            />
-                            <div className="invalid-tooltip">
-                                Please enter your name.
-                            </div>
-                        </MDBCol>
-                        <MDBCol md="4" className="mb-3">
-                            <label htmlFor="defaultFormRegisterNameEx"
-                                   className="grey-text">Email
-                            </label>
-                            <input
-                                name="email"
-                                type="email"
-                                id="defaultFormRegisterEmailEx2"
-                                className="form-control"
-                                value={this.state.person_email}
-                                onChange={this.onChangePersonEmail}
-                                required
-                            />
-                            <div className="invalid-tooltip">
-                                Please provide a valid email address.
-                            </div>
-                        </MDBCol>
-                        <MDBCol md="4" className="mb-3">
-                            <label htmlFor="defaultFormRegisterPhoneEx3"
-                                   className="grey-text">Phone Number
-                            </label>
-                            <input
-                                name="phone"
-                                type="text"
-                                pattern="[0-9]*"
-                                id="defaultFormRegisterPhoneEx3"
-                                className="form-control"
-                                value={this.state.person_number}
-                                onChange={this.onChangePersonNumber}
-                                required
-                                minLength={10}
-                            />
-                            <div className="invalid-tooltip">
-                                Please provide a valid phone number.
-                            </div>
-                        </MDBCol>
-                    </MDBRow>
-                    <div className="form-group">
-                        <label htmlFor="person_start">Person Start: </label>
-                        <DatePicker
-                            name="person_start"
-                            selected={this.state.person_start}
-                            onChange={this.onChangePersonStart}
-                            selectsStart
-                            startDate={this.state.person_start}
-                            endDate={this.state.person_end}
-                        />
-                    </div>
-
-                    <div className="form-group">
-                        <label htmlFor="person_end">Person End: </label>
-                        <DatePicker
-                            name="person_end"
-                            selected={this.state.person_end}
-                            onChange={this.onChangePersonEnd}
-                            selectsEnd
-                            endDate={this.state.person_end}
-                            minDate={this.state.person_start}
-                        />
-                    </div>
-
-                    <div className="form-group">
-                        <button type="submit" className="btn btn-primary">Submit</button>
-                    </div>
-                </form>
+            <div>
+                <SectionContainer className="row"  noBorder>
+                    <MDBCol md="6" className="d-flex justify-content-center">
+                        <MDBCard>
+                            <MDBCardBody>
+                                <form className={"needs-validation"} onSubmit={this.onSubmit} noValidate>
+                                    <p className="h5 text-center mb-4">Please fill in your details</p>
+                                    <div className="grey-text">
+                                        <MDBInput
+                                            label="Full Name"
+                                            name="fname"
+                                            id="defaultFormRegisterNameEx"
+                                            icon="user"
+                                            value={this.state.person_name}
+                                            onChange={this.onChangePersonName}
+                                            required
+                                            outline
+                                            type="text"
+                                            validate
+                                            error="wrong"
+                                            success="right"
+                                        />
+                                        <MDBInput
+                                            label="Email"
+                                            icon="envelope"
+                                            outline
+                                            type="email"
+                                            name="email"
+                                            id="defaultFormRegisterEmailEx2"
+                                            validate
+                                            error="wrong"
+                                            success="right"
+                                            value={this.state.person_email}
+                                            onChange={this.onChangePersonEmail}
+                                            required
+                                        />
+                                        <MDBInput
+                                            label="Phone Number"
+                                            icon="envelope"
+                                            outline
+                                            name="phone"
+                                            type="text"
+                                            pattern="[0-9]*"
+                                            id="defaultFormRegisterPhoneEx3"
+                                            validate
+                                            value={this.state.person_number}
+                                            onChange={this.onChangePersonNumber}
+                                            required
+                                            minLength={10}
+                                        />
+                                        <DatePicker
+                                            outline
+                                            name="person_start"
+                                            id="person_start"
+                                            selected={this.state.person_start}
+                                            onChange={this.onChangePersonStart}
+                                            selectsStart
+                                            startDate={this.state.person_start}
+                                            endDate={this.state.person_end}
+                                            required
+                                        />
+                                        <DatePicker
+                                            name="person_end"
+                                            id="person_end"
+                                            className="form-control"
+                                            selected={this.state.person_end}
+                                            onChange={this.onChangePersonEnd}
+                                            selectsEnd
+                                            endDate={this.state.person_end}
+                                            minDate={this.state.person_start}
+                                            required
+                                        />
+                                    </div>
+                                    <div className="text-center mt-4">
+                                        <button className="btn btn-outline-purple" type="submit">
+                                            Send
+                                            <MDBIcon icon="paper-plane" className="ml-2"/>
+                                        </button>
+                                    </div>
+                                </form>
+                            </MDBCardBody>
+                        </MDBCard>
+                    </MDBCol>
+                </SectionContainer>
             </div>
         )
     }

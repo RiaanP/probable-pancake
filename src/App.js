@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import {
+    MDBNavbar,
+    MDBNavbarBrand,
+    MDBFooter,
+    MDBContainer
+} from "mdbreact";
 import './App.css';
 
 import { BrowserRouter as Router, Link } from 'react-router-dom';
@@ -11,14 +16,31 @@ class App extends Component {
   render() {
     return (
         <Router>
+            <MDBNavbar
+                color="unique-color-dark"
+                dark
+            >
+                <MDBNavbarBrand href="/">
+                    <img
+                        src="https://mdbootstrap.com/img/logo/mdb-transparent.png"
+                        height="30"
+                        alt=""
+                    />
+                </MDBNavbarBrand>
+            </MDBNavbar>
           <div className="container">
-            <nav className="navbar navbar-expand-lg navbar-light bg-light">
-              <Link to={'/'} className="navbar-brand">React CRUD Example</Link>
-            </nav> <br/>
-            <h2>Welcome to React CRUD Tutorial</h2> <br/>
+            <h2>Welcome to my attempt at React</h2> <br/>
             <Create/>
             <PersonList/>
           </div>
+            <MDBFooter color="unique-color-dark" className="font-small mt-4">
+                <div className="footer-copyright text-center py-3">
+                    <MDBContainer fluid>
+                        &copy; {new Date().getFullYear()} Copyright:{" "}
+                        <a target={"_blank"} href="https://redsnare.co.za/"> Shaun </a>
+                    </MDBContainer>
+                </div>
+            </MDBFooter>
         </Router>
     );
   }
