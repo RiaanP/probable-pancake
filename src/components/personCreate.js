@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 export default class Create extends Component {
     constructor(props) {
@@ -15,8 +17,8 @@ export default class Create extends Component {
             person_name: '',
             person_email: '',
             person_number: '',
-            person_start: '2019-01-01',
-            person_end: '2019-12-01'
+            person_start: new Date(),
+            person_end: new Date()
         }
     }
 
@@ -36,19 +38,19 @@ export default class Create extends Component {
         this.setState({
             person_number: e.target.value
         });
-    }
+    };
 
-    onChangePersonStart(e) {
+    onChangePersonStart = date => {
         this.setState({
-            person_start: e.target.value
+            person_start: date
         });
-    }
+    };
 
-    onChangePersonEnd(e) {
+    onChangePersonEnd = date => {
         this.setState({
-            person_end: e.target.value
+            person_end: date
         });
-    }
+    };
 
     onSubmit(e) {
         e.preventDefault();
@@ -109,21 +111,23 @@ export default class Create extends Component {
 
                     <div className="form-group">
                         <label>Person Start:  </label>
-                        <input
-                            type="text"
-                            className="form-control"
-                            value={this.state.person_start}
+                        <DatePicker
+                            selected={this.state.person_start}
                             onChange={this.onChangePersonStart}
+                            selectsStart
+                            startDate={this.state.person_start}
+                            endDate={this.state.person_end}
                         />
                     </div>
 
                     <div className="form-group">
                         <label>Person End:  </label>
-                        <input
-                            type="text"
-                            className="form-control"
-                            value={this.state.person_end}
+                        <DatePicker
+                            selected={this.state.person_end}
                             onChange={this.onChangePersonEnd}
+                            selectsEnd
+                            endDate={this.state.person_end}
+                            minDate={this.state.person_start}
                         />
                     </div>
 
