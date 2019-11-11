@@ -10,7 +10,7 @@ export default class PersonList extends Component {
     }
 
     componentDidMount() {
-        axios.get('https://shaun-ability-test.herokuapp.com/person')
+        axios.get('https://shaun-ability-test-api.herokuapp.com/person')
             .then(response => {
                 this.setState({person: response.data});
             })
