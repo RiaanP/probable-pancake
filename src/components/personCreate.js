@@ -4,6 +4,31 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import {MDBRow, MDBCol, MDBBtn} from "mdbreact";
 
+function validate(name, email, phone) {
+    const errors = [];
+
+    if (name.length === 0) {
+        errors.push("Name can't be empty");
+    }
+
+    if (email.length < 5) {
+        errors.push("Email should be at least 5 characters long");
+    }
+    if (email.split("").filter(x => x === "@").length !== 1) {
+        errors.push("Email should contain a @");
+    }
+
+    if (phone.length < 10) {
+        errors.push("Phone should be at least 10 characters long");
+    }
+    if (!/^\d+$/.test(phone))
+    {
+        errors.push("Phone should be at least 10 characters long");
+    }
+
+    return errors;
+}
+
 export default class Create extends Component {
     constructor(props) {
         super(props);
@@ -19,7 +44,8 @@ export default class Create extends Component {
             person_email: '',
             person_number: '',
             person_start: new Date(),
-            person_end: new Date()
+            person_end: new Date(),
+            errors: []
         }
     }
 
@@ -63,6 +89,14 @@ export default class Create extends Component {
             person_end: this.state.person_end,
             person_created: Date.now()
         };
+        const errors = validate(obj.person_name, obj.person_email, obj.person_number);
+        e.target.className += " was-validated";
+        if (errors.length > 0) {
+            this.setState({ errors });
+            return;
+        }
+
+
         axios.post('http://api.shaun.software/person/add', obj)
             .then(res => console.log(res.data));
 
@@ -72,51 +106,67 @@ export default class Create extends Component {
             person_number: '',
             person_start: '',
             person_end: ''
-        })
+        });
+        e.target.className -= " was-validated";
     }
 
     render() {
         return (
             <div style={{marginTop: 10}}>
                 <h3>Create Person</h3>
-                <form onSubmit={this.onSubmit}>
+                <form className={"needs-validation"} onSubmit={this.onSubmit} noValidate>
                     <MDBRow>
                         <MDBCol md="4" className="mb-3">
-                            <div className="form-group">
-                                <label htmlFor="person_name">Person Name: </label>
-                                <input
-                                    name="person_name"
-                                    type="text"
-                                    className="form-control"
-                                    value={this.state.person_name}
-                                    onChange={this.onChangePersonName}
-                                    required
-                                    minLength={3}
-                                />
+                            <label htmlFor="defaultFormRegisterNameEx"
+                                   className="grey-text">Fullname
+                            </label>
+                            <input
+                                name="fname"
+                                type="text"
+                                id="defaultFormRegisterNameEx"
+                                className="form-control"
+                                value={this.state.person_name}
+                                onChange={this.onChangePersonName}
+                                required
+                            />
+                            <div className="invalid-tooltip">
+                                Please enter your name.
                             </div>
                         </MDBCol>
                         <MDBCol md="4" className="mb-3">
-                            <div className="form-group">
-                                <label htmlFor="person+email">Person Email: </label>
-                                <input
-                                    name="person_email"
-                                    type="email"
-                                    className="form-control"
-                                    value={this.state.person_email}
-                                    required
-                                    onChange={this.onChangePersonEmail}
-                                />
+                            <label htmlFor="defaultFormRegisterNameEx"
+                                   className="grey-text">Email
+                            </label>
+                            <input
+                                name="email"
+                                type="email"
+                                id="defaultFormRegisterEmailEx2"
+                                className="form-control"
+                                value={this.state.person_email}
+                                onChange={this.onChangePersonEmail}
+                                required
+                            />
+                            <div className="invalid-tooltip">
+                                Please provide a valid email address.
                             </div>
                         </MDBCol>
                         <MDBCol md="4" className="mb-3">
-                            <div className="form-group">
-                                <label>Person Phone: </label>
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    value={this.state.person_number}
-                                    onChange={this.onChangePersonNumber}
-                                />
+                            <label htmlFor="defaultFormRegisterPhoneEx3"
+                                   className="grey-text">Phone Number
+                            </label>
+                            <input
+                                name="phone"
+                                type="text"
+                                pattern="[0-9]*"
+                                id="defaultFormRegisterPhoneEx3"
+                                className="form-control"
+                                value={this.state.person_number}
+                                onChange={this.onChangePersonNumber}
+                                required
+                                minLength={10}
+                            />
+                            <div className="invalid-tooltip">
+                                Please provide a valid phone number.
                             </div>
                         </MDBCol>
                     </MDBRow>
