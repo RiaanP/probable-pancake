@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import axios from 'axios';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import {MDBRow, MDBCol, MDBBtn} from "mdbreact";
 
 export default class Create extends Component {
     constructor(props) {
@@ -76,42 +77,53 @@ export default class Create extends Component {
 
     render() {
         return (
-            <div style={{ marginTop: 10 }}>
+            <div style={{marginTop: 10}}>
                 <h3>Create Person</h3>
                 <form onSubmit={this.onSubmit}>
+                    <MDBRow>
+                        <MDBCol md="4" className="mb-3">
+                            <div className="form-group">
+                                <label htmlFor="person_name">Person Name: </label>
+                                <input
+                                    name="person_name"
+                                    type="text"
+                                    className="form-control"
+                                    value={this.state.person_name}
+                                    onChange={this.onChangePersonName}
+                                    required
+                                    minLength={3}
+                                />
+                            </div>
+                        </MDBCol>
+                        <MDBCol md="4" className="mb-3">
+                            <div className="form-group">
+                                <label htmlFor="person+email">Person Email: </label>
+                                <input
+                                    name="person_email"
+                                    type="email"
+                                    className="form-control"
+                                    value={this.state.person_email}
+                                    required
+                                    onChange={this.onChangePersonEmail}
+                                />
+                            </div>
+                        </MDBCol>
+                        <MDBCol md="4" className="mb-3">
+                            <div className="form-group">
+                                <label>Person Phone: </label>
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    value={this.state.person_number}
+                                    onChange={this.onChangePersonNumber}
+                                />
+                            </div>
+                        </MDBCol>
+                    </MDBRow>
                     <div className="form-group">
-                        <label>Person Name:  </label>
-                        <input
-                            type="text"
-                            className="form-control"
-                            value={this.state.person_name}
-                            onChange={this.onChangePersonName}
-                        />
-                    </div>
-
-                    <div className="form-group">
-                        <label>Person Email:  </label>
-                        <input
-                            type="text"
-                            className="form-control"
-                            value={this.state.person_email}
-                            onChange={this.onChangePersonEmail}
-                        />
-                    </div>
-
-                    <div className="form-group">
-                        <label>Person Phone:  </label>
-                        <input
-                            type="text"
-                            className="form-control"
-                            value={this.state.person_number}
-                            onChange={this.onChangePersonNumber}
-                        />
-                    </div>
-
-                    <div className="form-group">
-                        <label>Person Start:  </label>
+                        <label htmlFor="person_start">Person Start: </label>
                         <DatePicker
+                            name="person_start"
                             selected={this.state.person_start}
                             onChange={this.onChangePersonStart}
                             selectsStart
@@ -121,8 +133,9 @@ export default class Create extends Component {
                     </div>
 
                     <div className="form-group">
-                        <label>Person End:  </label>
+                        <label htmlFor="person_end">Person End: </label>
                         <DatePicker
+                            name="person_end"
                             selected={this.state.person_end}
                             onChange={this.onChangePersonEnd}
                             selectsEnd
@@ -132,7 +145,7 @@ export default class Create extends Component {
                     </div>
 
                     <div className="form-group">
-                        <input type="submit" value="Register Person" className="btn btn-primary"/>
+                        <button type="submit" className="btn btn-primary">Submit</button>
                     </div>
                 </form>
             </div>
