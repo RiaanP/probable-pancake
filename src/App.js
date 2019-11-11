@@ -22,14 +22,15 @@ class App extends Component {
             >
                 <MDBNavbarBrand href="/">
                     <img
-                        src="https://mdbootstrap.com/img/logo/mdb-transparent.png"
+                        src="https://redsnare.co.za/images/logo1.png"
                         height="30"
                         alt=""
                     />
                 </MDBNavbarBrand>
             </MDBNavbar>
           <div className="container">
-            <h2>Welcome to my attempt at React</h2> <br/>
+              <br/>
+            <h2 class="text-center">Welcome to my first attempt at React</h2> <br/>
             <Create/>
             <PersonList/>
           </div>
