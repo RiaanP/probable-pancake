@@ -7,6 +7,7 @@ import SectionContainer from "./../components/sectionContainer";
 import {
     MDBCol,
     MDBInput,
+    MDBRow,
     MDBBtn,
     MDBCard,
     MDBCardBody
@@ -119,87 +120,89 @@ export default class Create extends Component {
 
     render() {
         return (
-            <SectionContainer className="row" noBorder>
-                <MDBCol className="d-flex justify-content-center">
-                    <MDBCard>
-                        <MDBCardBody>
-                            <form className={"needs-validation"} onSubmit={this.onSubmit} noValidate>
-                                <p className="h5 text-center mb-4">Please fill in your details</p>
-                                <div className="grey-text">
-                                    <MDBInput
-                                        label="Full Name"
-                                        name="fname"
-                                        id="defaultFormRegisterNameEx"
-                                        value={this.state.person_name}
-                                        onChange={this.onChangePersonName}
-                                        required
-                                        type="text"
-                                        validate
-                                        error="wrong"
-                                        success="right"
-                                    />
-                                    <MDBInput
-                                        label="Email"
-                                        type="email"
-                                        name="email"
-                                        id="defaultFormRegisterEmailEx2"
-                                        validate
-                                        error="wrong"
-                                        success="right"
-                                        value={this.state.person_email}
-                                        onChange={this.onChangePersonEmail}
-                                        required
-                                    />
-                                    <MDBInput
-                                        label="Phone Number"
-                                        name="phone"
-                                        type="text"
-                                        pattern="[0-9]*"
-                                        id="defaultFormRegisterPhoneEx3"
-                                        validate
-                                        value={this.state.person_number}
-                                        onChange={this.onChangePersonNumber}
-                                        required
-                                        minLength={10}
-                                    />
-                                    <label htmlFor="person_start">Start Date</label>
-                                    <br/>
-                                    <DatePicker
-                                        outline
-                                        name="person_start"
-                                        id="person_start"
-                                        selected={this.state.person_start}
-                                        onChange={this.onChangePersonStart}
-                                        selectsStart
-                                        className="form-control"
-                                        startDate={this.state.person_start}
-                                        endDate={this.state.person_end}
-                                        required
-                                    />
-                                    <br/><br/>
-                                    <label htmlFor="person_end">End Date</label>
-                                    <br/>
-                                    <DatePicker
-                                        selected={this.state.person_end}
-                                        name="person_end"
-                                        id="person_end"
-                                        className="form-control"
-                                        onChange={this.onChangePersonEnd}
-                                        selectsEnd
-                                        endDate={this.state.person_end}
-                                        minDate={this.state.person_start}
-                                        required
-                                    />
-                                </div>
-                                <div className="text-center mt-4">
-                                    <MDBBtn size="lg" outline color="secondary" type="submit">
-                                        Submit
-                                    </MDBBtn>
-                                </div>
-                            </form>
-                        </MDBCardBody>
-                    </MDBCard>
-                </MDBCol>
+            <SectionContainer noBorder>
+                <MDBRow>
+                    <MDBCol className="d-flex justify-content-center">
+                        <MDBCard>
+                            <MDBCardBody>
+                                <form className={"needs-validation"} onSubmit={this.onSubmit} noValidate>
+                                    <p className="h5 text-center mb-4">Please fill in your details</p>
+                                    <div className="grey-text">
+                                        <MDBInput
+                                            label="Full Name"
+                                            name="fname"
+                                            id="defaultFormRegisterNameEx"
+                                            value={this.state.person_name}
+                                            onChange={this.onChangePersonName}
+                                            required
+                                            type="text"
+                                            validate
+                                            error="wrong"
+                                            success="right"
+                                        />
+                                        <MDBInput
+                                            label="Email"
+                                            type="email"
+                                            name="email"
+                                            id="defaultFormRegisterEmailEx2"
+                                            validate
+                                            error="wrong"
+                                            success="right"
+                                            value={this.state.person_email}
+                                            onChange={this.onChangePersonEmail}
+                                            required
+                                        />
+                                        <MDBInput
+                                            label="Phone Number"
+                                            name="phone"
+                                            type="text"
+                                            pattern="[0-9]*"
+                                            id="defaultFormRegisterPhoneEx3"
+                                            validate
+                                            value={this.state.person_number}
+                                            onChange={this.onChangePersonNumber}
+                                            required
+                                            minLength={10}
+                                        />
+                                        <label htmlFor="person_start">Start Date</label>
+                                        <br/>
+                                        <DatePicker
+                                            outline
+                                            name="person_start"
+                                            id="person_start"
+                                            selected={this.state.person_start}
+                                            onChange={this.onChangePersonStart}
+                                            selectsStart
+                                            className="form-control"
+                                            startDate={this.state.person_start}
+                                            endDate={this.state.person_end}
+                                            required
+                                        />
+                                        <br/><br/>
+                                        <label htmlFor="person_end">End Date</label>
+                                        <br/>
+                                        <DatePicker
+                                            selected={this.state.person_end}
+                                            name="person_end"
+                                            id="person_end"
+                                            className="form-control"
+                                            onChange={this.onChangePersonEnd}
+                                            selectsEnd
+                                            endDate={this.state.person_end}
+                                            minDate={this.state.person_start}
+                                            required
+                                        />
+                                    </div>
+                                    <div className="text-center mt-4">
+                                        <MDBBtn size="lg" outline color="secondary" type="submit">
+                                            Submit
+                                        </MDBBtn>
+                                    </div>
+                                </form>
+                            </MDBCardBody>
+                        </MDBCard>
+                    </MDBCol>
+                </MDBRow>
             </SectionContainer>
         )
     }
