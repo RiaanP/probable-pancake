@@ -52,7 +52,7 @@ export default class Create extends Component {
             person_email: '',
             person_number: '',
             person_start: new Date(),
-            person_end: new Date(),
+            person_end: '',
             errors: []
         }
     }
@@ -112,7 +112,7 @@ export default class Create extends Component {
             person_name: '',
             person_email: '',
             person_number: '',
-            person_start: '',
+            person_start: new Date(),
             person_end: ''
         });
         e.target.className -= " was-validated";
