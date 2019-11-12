@@ -22,7 +22,7 @@ class App extends Component {
             >
                 <MDBNavbarBrand href="/">
                     <img
-                        src="https://redsnare.co.za/images/logo1.png"
+                        src={require('./assets/logo.png')}
                         height="30"
                         alt=""
                     />

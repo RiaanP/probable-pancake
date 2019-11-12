@@ -123,7 +123,7 @@ export default class Create extends Component {
             <SectionContainer noBorder>
                 <MDBRow>
                     <MDBCol className="d-flex justify-content-center">
-                        <MDBCard>
+                        <MDBCard className="w-responsive text-center mx-auto p-3 mt-2">
                             <MDBCardBody>
                                 <form className={"needs-validation"} onSubmit={this.onSubmit} noValidate>
                                     <p className="h5 text-center mb-4">Please fill in your details</p>
@@ -155,8 +155,7 @@ export default class Create extends Component {
                                         <MDBInput
                                             label="Phone Number"
                                             name="phone"
-                                            type="text"
-                                            pattern="[0-9]*"
+                                            type="tel"
                                             id="defaultFormRegisterPhoneEx3"
                                             validate
                                             value={this.state.person_number}

@@ -1,6 +1,19 @@
 import React, {Component} from "react";
 import axios from "axios";
 import TableRow from "./TableRow";
+import SectionContainer from "./../components/sectionContainer";
+
+import {
+    MDBCol,
+    MDBRow,
+    MDBBtn,
+    MDBCard,
+    MDBCardBody,
+    MDBCardImage,
+    MDBCardTitle,
+    MDBCardText,
+    MDBIcon
+} from "mdbreact";
 
 export default class PersonList extends Component {
 
@@ -25,25 +38,38 @@ export default class PersonList extends Component {
         });
     }
 
+    tabCard() {
+        return this.state.person.map(function (object, i) {
+            return (
+            <MDBCol className="d-flex justify-content-center">
+                <MDBCard style={{ width: "22rem" }}>
+                    <MDBCardImage className="w-50 mx-auto p-3 mt-2" src={require('../assets/User.png')} />
+                    <MDBCardBody>
+                        <MDBCardTitle className="text-center ">{object.person_name}</MDBCardTitle>
+                        <MDBCardText className="border-top border-secondary">
+                            <ul className="fa-ul">
+                                <li className="my-2"><MDBIcon icon="at" size="lg" list />{object.person_email}</li>
+                                <li className="mb-2"><MDBIcon icon="phone" size="lg" list />{object.person_number}</li>
+                                <li className="mb-2"><MDBIcon far icon="calendar-check" size="lg" list />{object.person_start}</li>
+                                <li className="mb-2"><MDBIcon far icon="calendar-times" size="lg" list />{object.person_end}</li>
+                            </ul>
+                        </MDBCardText>
+                    </MDBCardBody>
+                </MDBCard>
+            </MDBCol>);
+        });
+    }    
+
     render() {
         return (
             <div>
                 <h3 align="center">Person List</h3>
-                <table className="table table-striped" style={{marginTop: 20}}>
-                    <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                        <th>Start</th>
-                        <th>End</th>
-                        <th>Created</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {this.tabRow()}
-                    </tbody>
-                </table>
+
+                <SectionContainer noBorder>
+                    <MDBRow>                        
+                            {this.tabCard()}                       
+                    </MDBRow>
+                </SectionContainer>                
             </div>
         );
     }
