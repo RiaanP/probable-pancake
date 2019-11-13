@@ -1,4 +1,4 @@
-import { ADD_PERSON, ADD_PEOPLE } from '../actions/actions';
+import { ADD_PERSON, ADD_PEOPLE, FETCH_PEOPLE } from '../actions/actions';
 const initialState = {
     people: []
 };
@@ -31,7 +31,8 @@ function rootReducer(state = initialState, action) {
                     }
                 ]
             };
-
+        case FETCH_PEOPLE:
+            return action.people;
         default:
             return state;
     };

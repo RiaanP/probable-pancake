@@ -1,5 +1,6 @@
 export const ADD_PERSON = 'ADD_PERSON';
 export const ADD_PEOPLE = 'ADD_PEOPLE';
+export const FETCH_PEOPLE = 'FETCH_PEOPLE';
 
 export function addPerson(person_name, person_person_email, person_number, person_start, person_end) {
     return {
