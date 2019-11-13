@@ -3,6 +3,8 @@ import axios from 'axios';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import SectionContainer from "./../components/sectionContainer";
+import { connect } from 'react-redux';
+import {addPerson} from '../actions/actions';
 
 import {
     MDBCol,
@@ -13,7 +15,7 @@ import {
     MDBCardBody
 } from "mdbreact";
 
-function validate(name, email, phone) {
+function validate(name, email, phone, start, end) {
     const errors = [];
 
     if (name.length === 0) {
@@ -34,10 +36,20 @@ function validate(name, email, phone) {
         errors.push("Phone should be at least 10 characters long");
     }
 
+    if (start.length < 5)
+    {
+        errors.push("Start date is not valid");
+    }
+
+    if (end.length < 5)
+    {
+        errors.push("End date is not valid");
+    }
+
     return errors;
 }
 
-export default class Create extends Component {
+class Create extends Component {
     constructor(props) {
         super(props);
         this.onChangePersonName = this.onChangePersonName.bind(this);
@@ -97,25 +109,46 @@ export default class Create extends Component {
             person_end: this.state.person_end,
             person_created: Date.now()
         };
-        const errors = validate(obj.person_name, obj.person_email, obj.person_number);
+        const errors = validate(
+            obj.person_name,
+            obj.person_email,
+            obj.person_number,
+            obj.person_start,
+            obj.person_end);
         e.target.className += " was-validated";
+        console.log(errors);
         if (errors.length > 0) {
             this.setState({errors});
             return;
         }
+        else
+        {
+            axios.post('http://api.shaun.software/person/add', obj)
+                .then(res => console.log(res.data));
 
+            let {
+                person_name,
+                person_email,
+                person_number,
+                person_start,
+                person_end
+            } = this.state;
 
-        axios.post('http://api.shaun.software/person/add', obj)
-            .then(res => console.log(res.data));
+            this.props.addPerson(person_name,
+                person_email,
+                person_number,
+                person_start,
+                person_end);
 
-        this.setState({
-            person_name: '',
-            person_email: '',
-            person_number: '',
-            person_start: new Date(),
-            person_end: ''
-        });
-        e.target.className -= " was-validated";
+            this.setState({
+                person_name: '',
+                person_email: '',
+                person_number: '',
+                person_start: new Date(),
+                person_end: ''
+            });
+            e.target.className -= " was-validated";
+        }
     }
 
     render() {
@@ -130,8 +163,8 @@ export default class Create extends Component {
                                     <div className="grey-text">
                                         <MDBInput
                                             label="Full Name"
-                                            name="fname"
-                                            id="defaultFormRegisterNameEx"
+                                            name="person_name"
+                                            id="person_name"
                                             value={this.state.person_name}
                                             onChange={this.onChangePersonName}
                                             required
@@ -143,8 +176,8 @@ export default class Create extends Component {
                                         <MDBInput
                                             label="Email"
                                             type="email"
-                                            name="email"
-                                            id="defaultFormRegisterEmailEx2"
+                                            name="person_email"
+                                            id="person_email"
                                             validate
                                             error="wrong"
                                             success="right"
@@ -154,9 +187,9 @@ export default class Create extends Component {
                                         />
                                         <MDBInput
                                             label="Phone Number"
-                                            name="phone"
-                                            type="tel"
-                                            id="defaultFormRegisterPhoneEx3"
+                                            name="person_number"
+                                            type="number"
+                                            id="person_number"
                                             validate
                                             value={this.state.person_number}
                                             onChange={this.onChangePersonNumber}
@@ -206,3 +239,10 @@ export default class Create extends Component {
         )
     }
 }
+
+export default connect(
+    null,
+    {
+        addPerson: addPerson
+    }
+)(Create);

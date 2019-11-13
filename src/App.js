@@ -16,10 +16,7 @@ class App extends Component {
   render() {
     return (
         <Router>
-            <MDBNavbar
-                color="unique-color-dark"
-                dark
-            >
+            <MDBNavbar color="unique-color-dark" dark>
                 <MDBNavbarBrand href="/">
                     <img
                         src={require('./assets/logo.png')}
@@ -30,7 +27,7 @@ class App extends Component {
             </MDBNavbar>
           <div className="container">
               <br/>
-            <h2 class="text-center">Welcome to my first attempt at React</h2> <br/>
+            <h2 className="text-center">Welcome to my first attempt at React</h2> <br/>
             <Create/>
             <PersonList/>
           </div>
