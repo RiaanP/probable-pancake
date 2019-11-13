@@ -1,30 +1,33 @@
 import React, {Component} from "react";
-import axios from "axios";
-import PersonCard from './PersonCard';
-import SectionContainer from "./../components/sectionContainer";
 import {connect} from 'react-redux';
-import thunk from 'redux-thunk';
-import { addPeople, ADD_PEOPLE, FETCH_PEOPLE} from '../actions/actions';
+import SectionContainer from "./../components/sectionContainer";
+import PersonCard from './PersonCard';
 
 import {
+    MDBCol,
     MDBRow,
 } from "mdbreact";
-
-
 
 class PersonList extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {people: []};
+        this.state = {
+            people: []
+        };
     }
 
+    /* Used to fetch data from redux store after call to api was made */
     tabCard() {
-        console.log('aa');
-        console.log(this.props.people);
-        {/*return this.props.people.map(function (object, i) {
-            return <PersonCard obj={object} key={i}/>
-        });*/}
+        if (this.props.people.length > 0) {
+            return this.props.people.map(function (object, i) {
+                return <PersonCard obj={object} key={i}/>
+            });
+        }
+        else
+        {
+            return <MDBCol className="d-flex justify-content-center mb-5">No Data</MDBCol>
+        }
     }
 
     render() {
@@ -43,7 +46,7 @@ class PersonList extends Component {
 
 }
 
-
+/* Used for selected data from the store that the connected component needs */
 const mapStateToProps = state => {
     return {
         people: state.people

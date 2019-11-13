@@ -3,7 +3,7 @@ import axios from 'axios';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import SectionContainer from "./../components/sectionContainer";
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import {addPerson} from '../actions/actions';
 
 import {
@@ -15,6 +15,7 @@ import {
     MDBCardBody
 } from "mdbreact";
 
+/* Just some basic validation for form inputs. Returns an array of all errors (if any)*/
 function validate(name, email, phone, start, end) {
     const errors = [];
 
@@ -36,13 +37,11 @@ function validate(name, email, phone, start, end) {
         errors.push("Phone should be at least 10 characters long");
     }
 
-    if (start.length < 5)
-    {
+    if (start.length < 5) {
         errors.push("Start date is not valid");
     }
 
-    if (end.length < 5)
-    {
+    if (end.length < 5) {
         errors.push("End date is not valid");
     }
 
@@ -52,6 +51,8 @@ function validate(name, email, phone, start, end) {
 class Create extends Component {
     constructor(props) {
         super(props);
+
+        /* Event listeners. This can be done a whole lot better with one binding (#time) */
         this.onChangePersonName = this.onChangePersonName.bind(this);
         this.onChangePersonEmail = this.onChangePersonEmail.bind(this);
         this.onChangePersonNumber = this.onChangePersonNumber.bind(this);
@@ -59,6 +60,7 @@ class Create extends Component {
         this.onChangePersonEnd = this.onChangePersonEnd.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
+        /* Basic construction of empty set */
         this.state = {
             person_name: '',
             person_email: '',
@@ -99,8 +101,11 @@ class Create extends Component {
         });
     };
 
+    /* Submit event for form submit */
     onSubmit(e) {
         e.preventDefault();
+
+        /* Create new object with all data from the form */
         const obj = {
             person_name: this.state.person_name,
             person_email: this.state.person_email,
@@ -109,23 +114,25 @@ class Create extends Component {
             person_end: this.state.person_end,
             person_created: Date.now()
         };
+
+        /* Validate the above object's data */
         const errors = validate(
             obj.person_name,
             obj.person_email,
             obj.person_number,
             obj.person_start,
             obj.person_end);
-        e.target.className += " was-validated";
-        console.log(errors);
+
         if (errors.length > 0) {
+            /* Add class to form so that validation icons can display */
+            e.target.className += " was-validated";
             this.setState({errors});
-            return;
-        }
-        else
-        {
+        } else {
+            /* Post data to api and save into mongodb */
             axios.post('http://api.shaun.software/person/add', obj)
                 .then(res => console.log(res.data));
 
+            /* Add person into the state for later use by redux*/
             let {
                 person_name,
                 person_email,

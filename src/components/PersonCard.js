@@ -1,5 +1,6 @@
+/* This component renders a card with a person's details on */
 import React, { Component } from 'react';
-import {MDBCard, MDBCardBody, MDBCardImage, MDBCardText, MDBCardTitle, MDBCol, MDBIcon} from "mdbreact";
+import {MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCol, MDBIcon} from "mdbreact";
 import Moment from "react-moment";
 
 class PersonCard extends Component {

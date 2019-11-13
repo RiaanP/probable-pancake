@@ -7,7 +7,7 @@ import {
 } from "mdbreact";
 import './App.css';
 
-import { BrowserRouter as Router, Link } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 import Create from './components/personCreate';
 import PersonList from "./components/personList";
@@ -35,7 +35,7 @@ class App extends Component {
                 <div className="footer-copyright text-center py-3">
                     <MDBContainer fluid>
                         &copy; {new Date().getFullYear()} Copyright:{" "}
-                        <a target={"_blank"} href="https://redsnare.co.za/"> Shaun </a>
+                        <a target={"_blank"} href="https://redsnare.co.za/"> Shaun Wessels </a>
                     </MDBContainer>
                 </div>
             </MDBFooter>

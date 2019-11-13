@@ -1,3 +1,5 @@
+/* Basic component used primarily for rendering */
+
 import React from "react";
 import { MDBContainer } from "mdbreact";
 import classNames from "classnames";
